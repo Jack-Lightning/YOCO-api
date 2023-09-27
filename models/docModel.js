@@ -5,7 +5,7 @@ let fileSchema = mongoose.Schema({
         type:String,
         required:true,
     },
-    fileName:{
+    file:{
         type:String,
         required:true,
     }

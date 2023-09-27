@@ -1,4 +1,4 @@
-const { default: mongoose } = require('mongoose');
+const mongoose = require('mongoose');
 const userModel = require('../models/userModel.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -50,7 +50,7 @@ exports.loginUser = async(req,res)=>{
                 //Create and assign token
                 const token = jwt.sign({
                     email:email,
-                    id:newUser._id
+                    id:userExists._id
                 },process.env.TOKEN_SECRET,{expiresIn:'5h'});
                 
                 res.status(200).json({message:'Logged in successfully',token:token});
@@ -119,7 +119,7 @@ exports.registerUser = async(req,res)=>{
             res.status(200).json({message:'Registered successfully',token:token});
         }
     }catch(err){
-        res.status(500).json({message:"Error"+err});
+        res.status(500).json({message:"Error occured while registering user"});
     }
 }
 }

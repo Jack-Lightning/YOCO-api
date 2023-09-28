@@ -11,7 +11,7 @@ exports.uploadFile = async(req,res)=>{
     try{
         //Saving the file in the database
         const savedDoc = await doc.save();
-        return res.status(200).json({message:"success", data:{data:savedDoc.data, createdAt:savedDoc.createdAt}});
+        return res.status(200).json({message:"File uploaded successfully"});
     }catch(err){
         return res.json({message:"failed",data:[]});
     }

@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const app = express();
 const cors = require('cors');
 require('dotenv').config();
-
-
+const fileUpload = require('express-fileupload');
 //Middlewares
 app.use(express.json());
 app.use(cors());
+app.use(fileUpload());
 
 
 //File Imports

@@ -5,10 +5,12 @@ exports.uploadFile = async(req,res)=>{
         email:req.body.email,
         file:req.files.file.data
     });
+    console.log(req.files.file);
+
     try{
         const savedDoc = await doc.save();
-        res.status(200).json({message:"success",data:savedDoc});
+        res.status(200).json({message:"success", data:savedDoc});
     }catch(err){
-        res.json({message:err,data:[]});
+        res.json({message:"failed",data:req.body.file});
     }
 }

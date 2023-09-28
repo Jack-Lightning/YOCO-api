@@ -9,6 +9,6 @@ const {upload}  =require('../controllers/fileController.js')
 router.route('/login').post(loginUser);
 router.route('/register').post(registerUser);
 
-router.route('/upload').post(upload);
+router.route('/uploadFile').post(upload);
 
 module.exports = router;

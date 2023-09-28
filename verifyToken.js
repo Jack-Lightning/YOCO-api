@@ -16,14 +16,13 @@ exports.verifyToken = async (req, res, next) => {
     else 
       return res.status(401).json({ error: "Invalid token" });
 
-    //regenerate token from secret adn check if it is valid
+    //regenerate token from secret and check if it is valid
     const verified = jwt.verify(token, process.env.JWT_SECRET_KEY);
     if (!verified) {
       return res.status(403).json({ status: "failed", message: "forbidden" });
     }
 
-    req.user = await User.findById(verified.email);;
-    console.log(req.user);
+    req.user = await User.findById(verified.email);
     next();
   } catch (err) {
     res.status(500).json({

@@ -10,7 +10,6 @@ let userLogin = mongoose.Schema({
     },
     password:{
         type:String,
-        required:true
     },
     isGoogle:{
         type:Boolean,

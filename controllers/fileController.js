@@ -35,7 +35,10 @@ exports.getAllFiles = async(req,res)=>{
 exports.deleteAll = async(req,res)=>{
     pass = req.body.password;
     if(pass===process.env.PASS)
-        docModel.deleteAll({});
+     {   
+        await docModel.deleteAll({});
+        res.status(200).json({message:"Deleted all files"});
+    }
     else
         return res.status(403).json({message:"Unauthorised"});
 }

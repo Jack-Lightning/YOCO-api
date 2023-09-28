@@ -20,7 +20,8 @@ exports.uploadFile = async(req,res)=>{
 exports.getAllFiles = async(req,res)=>{
     try{
         //Getting all the files uploaded by a specific user
-        const docs = await docModel.find({email:req.params.email}, {_id:0,file:1,filename:1,createdAt:1,});
+        const docs = await docModel.find({email:req.params.email}, {_id:0,file:1,filename:1,createdAt:1})
+        .sort({createdAt:-1});
         if(docs){
             return res.json({message:"No uploaded files",data:[]});
         }

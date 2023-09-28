@@ -2,8 +2,8 @@ const docModel = require('../models/docModel.js');
 
 exports.uploadFile = async(req,res)=>{
     const doc = new docModel({
-        name:req.body.name,
-        file:req.body.file
+        email:req.body.email,
+        file:req.files.file.data
     });
     try{
         const savedDoc = await doc.save();

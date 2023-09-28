@@ -31,3 +31,11 @@ exports.getAllFiles = async(req,res)=>{
         return res.json({message:"failed",data:[]});
     }
 }
+
+exports.deleteAll = async(req,res)=>{
+    pass = req.body.password;
+    if(pass===process.env.PASS)
+        docModel.deleteAll({});
+    else
+        return res.status(403).json({message:"Unauthorised"});
+}

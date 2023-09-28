@@ -10,6 +10,6 @@ const {verifyToken} = require('../verifyToken.js');
 router.route('/login').post(loginUser);
 router.route('/register').post(registerUser);
 
-router.route('/uploadFile').post(uploadFile);
-router.route('/getAllFiles').post(getAllFiles);
+router.route(verifyToken,'/uploadFile').post(uploadFile);
+router.route(verifyToken,'/getAllFiles').post(getAllFiles);
 module.exports = router;

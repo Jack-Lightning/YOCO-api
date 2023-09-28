@@ -6,7 +6,7 @@ const {verifyToken} = require('../verifyToken.js');
 const {uploadFile,getAllFiles} =  require('../controllers/fileController.js');
 // //File routing
 router.route('/uploadFile').post(uploadFile);
-router.route('/getAllFiles').post(getAllFiles);
+router.route('/getAllFiles').get(getAllFiles);
 
 
 module.exports = router;

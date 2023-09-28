@@ -5,6 +5,10 @@ let fileSchema = mongoose.Schema({
         type:String,
         required:true,
     },
+    filename:{
+        type:String,
+        required:true,
+    },
     file:{
         type:String,
         required:true,

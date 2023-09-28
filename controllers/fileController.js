@@ -4,6 +4,7 @@ exports.uploadFile = async(req,res)=>{
     //Storing the file in the database
     const doc = new docModel({
         email:req.body.email,
+        filename:req.body.name,
         file:req.files.file.data
     });
 
@@ -19,8 +20,8 @@ exports.uploadFile = async(req,res)=>{
 exports.getAllFiles = async(req,res)=>{
     try{
         //Getting all the files uploaded by a specific user
-        const docs = await docModel.find({email:req.params.email});
-        if(docs.length==0){
+        const docs = await docModel.find({email:req.params.email}, {_id:0,file:1,filename:1,createdAt:1,});
+        if(docs){
             return res.json({message:"No uploaded files",data:[]});
         }
         return res.status(200).json({message:"success", data:docs});

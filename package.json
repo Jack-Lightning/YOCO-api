@@ -13,7 +13,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev-build": "SET NODE_ENV=development & nodemon server.js",
-    "prod-build": "SET NODE_ENV=production & nodemon server.js"
+    "dev-build": "nodemon server.js"
   }
 }

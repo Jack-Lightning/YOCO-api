@@ -1,16 +1,30 @@
 const docModel = require('../models/docModel.js');
 
 exports.uploadFile = async(req,res)=>{
+    //Storing the file in the database
     const doc = new docModel({
         email:req.body.email,
         file:req.files.file.data
     });
-    console.log(req.files.file);
 
     try{
+        //Saving the file in the database
         const savedDoc = await doc.save();
-        res.status(200).json({message:"success", data:savedDoc});
+        return res.status(200).json({message:"success", data:{data:savedDoc.data, createdAt:savedDoc.createdAt}});
     }catch(err){
-        res.json({message:"failed",data:req.body.file});
+        return res.json({message:"failed",data:[]});
+    }
+}
+
+exports.getAllFiles = async(req,res)=>{
+    try{
+        //Getting all the files uploaded by a specific user
+        const docs = await docModel.find({email:req.params.email});
+        if(docs.length==0){
+            return res.json({message:"No uploaded files",data:[]});
+        }
+        return res.status(200).json({message:"success", data:docs});
+    }catch(err){
+        return res.json({message:"failed",data:[]});
     }
 }

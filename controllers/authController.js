@@ -1,9 +1,42 @@
 const mongoose = require('mongoose');
 const userModel = require('../models/userModel.js');
+const gUserModel = require('../models/googleuserModel.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const oauth = require('oauth');
 const axios = require('axios');
+
+
+exports.googleLoginUser = async(req,res)=>{
+   
+    const email = req.body.email;
+    const uid = req.body.uid;
+    const name = req.body.name; 
+    let userExists = await gUserModel.findOne({email:email});
+
+    if(userExists){
+        //validate hashed password
+            const token = jwt.sign({
+                email:email,
+                id:userExists._id
+            },process.env.TOKEN_SECRET,{expiresIn:'5h'});
+            
+            res.status(200).json({message:'Logged in successfully',token:token});
+    }else{
+        let newUser = new gUserModel({
+            email: email,
+            uid: uid,
+            name: name
+        });
+        await newUser.save();
+        const token = jwt.sign({
+            email:email,
+            id:userExists._id
+        },process.env.TOKEN_SECRET,{expiresIn:'5h'});
+        
+        res.status(400).json({message:'User regsitered successfully',token:token});
+    }
+}
 
 
 exports.loginUser = async(req,res)=>{

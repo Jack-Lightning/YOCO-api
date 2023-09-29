@@ -5,8 +5,8 @@ const router = express.Router();
 const {verifyToken} = require('../verifyToken.js');
 const {uploadFile,getAllFiles,deleteAll} =  require('../controllers/fileController.js');
 // //File routing
-router.route('/uploadFile').post(uploadFile);
-router.route('/getAllFiles').get(getAllFiles);
+router.route('/uploadFile').post(verifyToken,uploadFile);
+router.route('/getAllFiles').get(verifyToken,getAllFiles);
 router.route('/deleteAll').post(deleteAll);
 
 module.exports = router;
